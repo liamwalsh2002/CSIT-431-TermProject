@@ -1,5 +1,5 @@
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
+from watchdog.events import DirModifiedEvent, FileModifiedEvent, FileSystemEventHandler
 import time
 from datetime import datetime
 import random
@@ -8,6 +8,16 @@ import os
 
 class handler(FileSystemEventHandler):
 
+    def on_modified(self, event):
+        if event.is_directory:
+            return
+        
+        with open('./journal_folder/jl_abc_txt_81247.DAT', 'a') as journalFile:
+            # journal_entry = f"File Created: {event.src_path} - Random Number: {randomNumber} - Date/Time: {datetime.now()}\n"
+            journal_entry = "testing that it picks up modfied"
+            journalFile.write(journal_entry)
+        # return super().on_modified(event)
+    
     def on_created(self, event):
         if event.is_directory:
             return
