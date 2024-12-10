@@ -21,7 +21,7 @@ def reconstruct_file(file, start_time_str):
             timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
 
             # print(timestamp, action, line_no,content)
-            if timestamp >= start_time:
+            if timestamp < start_time:
                 continue
 
             if action == '+':
