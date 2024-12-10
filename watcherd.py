@@ -90,6 +90,9 @@ if __name__ == "__main__":
     # Ensure the watched folder exists
     os.makedirs(WATCHED_FOLDER, exist_ok=True)
 
+    for filename in os.listdir(WATCHED_FOLDER):
+        if filename.endswith('.txt'):
+            track_file(WATCHED_FOLDER+'/'+filename)
     # Initialize the observer and handler
     event_handler = FileChangeHandler()
     observer = Observer()
